@@ -8,49 +8,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import br.edu.atitus.greeting_service.configs.GreetingConfig;
 import br.edu.atitus.greeting_service.dtos.GreetingDTO;
 
 @RestController
 @RequestMapping("greeting")
 public class GreetingController {
-
-	// @Value("${greeting-service.greeting}")
-	// private String greeting;
-	// @Value("${greeting-service.default-name}")
-	// private String defaultName;
-
+	
 	private final GreetingConfig config;
-
+	
 	public GreetingController(GreetingConfig config) {
 		super();
 		this.config = config;
 	}
-
-	@GetMapping
-	public ResponseEntity<String> greet(@RequestParam(required = false) String name) {
+	
+	@GetMapping({"", "/{namePath}"})
+	public ResponseEntity<String> greet(
+			@RequestParam(required = false) String name,
+			@PathVariable(required = false) String namePath){
 		String greetingReturn = config.getGreeting();
-		String nameReturn = name != null ? name : config.getDefaultName();
+		String nameReturn = name != null 
+				? name 
+				: namePath != null ? namePath : config.getDefaultName();
 		String textReturn = String.format("%s, %s!!!", greetingReturn, nameReturn);
-
+		
 		return ResponseEntity.ok(textReturn);
 	}
-
-	@GetMapping(value = "/{name}")
-	public ResponseEntity<String> greetPathVar(@PathVariable(required = true) String name) throws Exception {
+	
+	@PostMapping
+	public ResponseEntity<String> greetPost(
+			@RequestBody GreetingDTO dto){
 		String greetingReturn = config.getGreeting();
-		String nameReturn = name != null ? name : config.getDefaultName();
+		String nameReturn = dto.name(); 
 		String textReturn = String.format("%s, %s!!!", greetingReturn, nameReturn);
-
-		return ResponseEntity.ok(textReturn);
-	}
-
-	@PostMapping()
-	public ResponseEntity<String> save(@RequestBody GreetingDTO dto) throws Exception {
-		String greetingReturn = config.getGreeting();
-		String nameReturn = dto != null ? dto.name() : config.getDefaultName();
-		String textReturn = String.format("%s, %s!!!", greetingReturn, nameReturn);
-
+		
 		return ResponseEntity.ok(textReturn);
 	}
 
