@@ -37,10 +37,6 @@ public class CurrencyController {
 			@PathVariable String source,
 			@PathVariable String target) throws Exception{
 		
-//		CurrencyEntity currency = repository.
-//				findBySourceAndTarget(source, target)
-//				.orElseThrow(() -> new Exception("Currency not found"));
-		
 		source = source.toUpperCase();
 		target = target.toUpperCase();
 		String dataSource = "None";
@@ -65,21 +61,17 @@ public class CurrencyController {
 					if (!source.equals("BRL")) {
 						CurrencyBCResponse resp = currencyBCClient.getCurrencyBC(source);
 						if (resp.getValue().isEmpty()) throw new Exception();
-						sourceRate = resp.getValue().
-								get(resp.getValue().size() - 1).getCotacaoVenda();
+						sourceRate = resp.getValue().get(resp.getValue().size() - 1).getCotacaoVenda();
 					}
 					if (!target.equals("BRL")) {
 						CurrencyBCResponse resp = currencyBCClient.getCurrencyBC(target);
 						if (resp.getValue().isEmpty()) throw new Exception();
-						targetRate = resp.getValue().
-								get(resp.getValue().size() - 1).getCotacaoVenda();
+						targetRate = resp.getValue().get(resp.getValue().size() - 1).getCotacaoVenda();
 					}
 					currency.setConversionRate(sourceRate/targetRate);
 					dataSource = "API BCB";
 				} catch (Exception e) {
-					currency = repository.
-							findBySourceAndTarget(source, target)
-							.orElseThrow(() -> new Exception("Currency not found"));
+					currency = repository.findBySourceAndTarget(source, target).orElseThrow(() -> new Exception("Currency not found"));
 					dataSource = "Local Database";
 				}
 			}
@@ -90,8 +82,7 @@ public class CurrencyController {
 		
 		
 		currency.setConvertedValue(value * currency.getConversionRate());
-		currency.setEnviroment("Currency running in port: " + serverPort
-								+ " - Source: " + dataSource);
+		currency.setEnviroment("Currency running in port: " + serverPort + " - Source: " + dataSource);
 		
 		
 		return ResponseEntity.ok(currency);
