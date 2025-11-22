@@ -1,5 +1,5 @@
 INSERT INTO tb_product (description, brand, model, currency, price, stock) VALUES
-  ('Iphone 15 256', 'Apple', 'iPhone 15 256GB', 'USD', 1022.96, 10),
-  ('Moto G85 256', 'Motorola', 'G85 256GB', 'USD', 306.78, 10),
-  ('Redmi 13c 256', 'Xiaomi', 'Redmi 13C 256GB', 'USD', 242.15, 10),
-  ('S23 Ultra 256', 'Samsung', 'S23 Ultra 256GB', 'USD', 768.70, 10);
+  	('Castanha de Caju', 'Naturallis', 'Pote 500g', 'BRL', 35.90, 50),
+	('Chá Verde', 'Naturallis', 'Pacote 100g', 'BRL', 12.50, 100),
+	('Erva Mate', 'Naturallis', 'Pacote 1kg', 'BRL', 25.00, 30),
+	('Mel Orgânico', 'Apiário', 'Vidro 300g', 'BRL', 45.00, 20);
