@@ -45,8 +45,8 @@ public class OrderService {
                 
                 CurrencyResponse currencyResponse = currencyClient.getCurrency(
 						item.getPriceAtPurchase(), item.getCurrencyAtPurchase(), targetCurrency);
-                item.setConvertedPriceAtPruchase(currencyResponse.getConvertedValue());
-                totalConvertedPrice += item.getConvertedPriceAtPruchase() * item.getQuantity();
+                item.setConvertedPriceAtPurchase(currencyResponse.getConvertedValue());
+                totalConvertedPrice += item.getConvertedPriceAtPurchase() * item.getQuantity();
             }
             order.setTotalPrice(totalPrice);
             order.setTotalConvertedPrice(totalConvertedPrice);

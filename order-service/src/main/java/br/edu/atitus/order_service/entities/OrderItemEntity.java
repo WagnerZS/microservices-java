@@ -44,7 +44,7 @@ public class OrderItemEntity {
     private ProductResponse product; // preenchido via chamada REST
 
     @Transient
-    private double convertedPriceAtPruchase; 
+    private double convertedPriceAtPurchase; 
     
 	public Long getId() {
 		return id;
@@ -102,12 +102,12 @@ public class OrderItemEntity {
 		this.product = product;
 	}
 
-	public double getConvertedPriceAtPruchase() {
-		return convertedPriceAtPruchase;
+	public double getConvertedPriceAtPurchase() {
+		return convertedPriceAtPurchase;
 	}
 
-	public void setConvertedPriceAtPruchase(double convertedPriceAtPruchase) {
-		this.convertedPriceAtPruchase = convertedPriceAtPruchase;
+	public void setConvertedPriceAtPurchase(double convertedPriceAtPurchase) {
+		this.convertedPriceAtPurchase = convertedPriceAtPurchase;
 	}
 
     
